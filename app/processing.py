@@ -36,9 +36,13 @@ def calculate_distance(x, y):
             break
 
     # Convert the output to json and return
-    output_json = json.loads(json.dumps(output))
+    output_json = json.dumps(output)
     return output_json
 
 
 
 # No if __name__ = "__main__" yet as this script will scrictly be imported in other scripts and won't be executed standalone.
+'''
+if __name__ == "__main__":
+    print calculate_distance(37.76,-122.4)
+'''
