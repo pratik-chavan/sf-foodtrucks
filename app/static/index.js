@@ -1,4 +1,3 @@
-
 var map;
 /*
  * use google maps api built-in mechanism to attach dom events
@@ -69,21 +68,28 @@ function findPlace() {
                 map:map,
                 position:results[0].geometry.location
             });
+            console.log("Result as is" + results[0].geometry.location);
         }
         else{
             alert('address not found!');
         }
 
-        {{ calculate_distance(request.json) }}
+        //{{ calculate_distance(request.json) }}
+        var split_location = ("" + results[0].geometry.location).split(",");
+        location_data = {};
+        location_data['lat'] = split_location[0].replace("(", "");
+        location_data['long'] = split_location[1].replace(")", "");
+        console.log("split_locationn " + split_location + location_data['lat']);
 
-        // $.ajax({
-        //     type : "POST",
-        //     url : "{{ url_for('data_to_find_distance') }}",
-        //     data: JSON.stringify(results[0].geometry.location, null, '\t'),
-        //     contentType: 'application/json;charset=UTF-8',
-        //     success: function(result) {
-        //         console.log(result);
-        //     }
-        // });
+        var a = $.ajax({
+            type : "POST",
+            url : "/data_to_find_distance",
+            data: JSON.stringify(location_data),
+            contentType: 'application/json;charset=UTF-8;',
+            success: function(result) {
+                console.log(""+result);
+            }
+        });
+        console.log(a);
     });
 }
