@@ -1,1 +1,4 @@
 flask/
+.idea/
+app/Mobile_Food_Facility_Permit.csv
+app/*.pyc
