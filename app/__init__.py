@@ -4,22 +4,17 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
+
+from migrate.versioning import api
+from config import SQLALCHEMY_DATABASE_URI
+from config import SQLALCHEMY_MIGRATE_REPO
+import os.path
+db.create_all()
+if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
+    api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
+    api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
+else:
+    api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO, api.version(SQLALCHEMY_MIGRATE_REPO))
+
 from app import views,models
 
-
-if not app.debug and os.environ.get('HEROKU') is None:
-    import logging
-    from logging.handlers import RotatingFileHandler
-    file_handler = RotatingFileHandler('tmp/sanfran-food-trucks.log', 'a', 1 * 1024 * 1024, 10)
-    file_handler.setLevel(logging.INFO)
-    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-    app.logger.addHandler(file_handler)
-    app.logger.setLevel(logging.INFO)
-    app.logger.info('sanfran-food-trucks startup')
-
-if os.environ.get('HEROKU') is not None:
-    import logging
-    stream_handler = logging.StreamHandler()
-    app.logger.addHandler(stream_handler)
-    app.logger.setLevel(logging.INFO)
-    app.logger.info('sanfran-food-trucks startup')
