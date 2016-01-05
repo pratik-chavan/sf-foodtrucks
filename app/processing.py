@@ -41,7 +41,7 @@ def calculate_distance(location_data , **kwargs):
     # Default number of results. To be modified in later versions of the script as this parameter will be retrieved from user.
     #  So, will most probably be in if-else fashion. If user enters use that or else use default
     if("number_of_results" in kwargs.keys()):
-        number_of_results = kwargs['number_of_results']
+        number_of_results = int(kwargs['number_of_results'])
     else:
         number_of_results = 5
 
@@ -56,7 +56,7 @@ def calculate_distance(location_data , **kwargs):
             # Otherwise, set radius = sys.maxint since in that case their is no restriction on perimeter
 
             if("radius" in kwargs.keys()):
-                radius = kwargs['radius']
+                radius = int(kwargs['radius'])
 
                 # is_dist_within_radius returns a tuple t. t[0] => True if distance between 2 points is less than radius.
                 # t[1] is the actual distance d (miles) between 2 points.
@@ -88,5 +88,3 @@ def calculate_distance(location_data , **kwargs):
 # if __name__ == "__main__":
 #     print calculate_distance(37.791777988510,-122.39751708644, radius=5, number_of_results=10)
 # No if __name__ = "__main__" yet as this script will scrictly be imported in other scripts and won't be executed standalone.
-
-

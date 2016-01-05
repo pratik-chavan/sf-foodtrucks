@@ -1,9 +1,10 @@
 var map;
+var location_data;
 /*
  * use google maps api built-in mechanism to attach dom events
  */
 google.maps.event.addDomListener(window, "load", function () {
-
+    location_data = {};
   /*
    * create map
    */
@@ -21,16 +22,16 @@ google.maps.event.addDomListener(window, "load", function () {
   /*
    * marker creater function (acts as a closure for html parameter)
    */
-  function createMarker(options, html) {
-    var marker = new google.maps.Marker(options);
-    if (html) {
-        google.maps.event.addListener(marker, "click", function () {
-            infoWindow.setContent(html);
-            infoWindow.open(options.map, this);
-        });
+    function createMarker(options, html) {
+        var marker = new google.maps.Marker(options);
+        if (html) {
+            google.maps.event.addListener(marker, "click", function () {
+                infoWindow.setContent(html);
+                infoWindow.open(options.map, this);
+            });
+        }
+        return marker;
     }
-    return marker;
-  }
 
   /*
    * add markers to map
@@ -44,6 +45,7 @@ google.maps.event.addDomListener(window, "load", function () {
 
 // Locate me method
 function findPlace() {
+    location_data = {};
     var location = document.getElementById("location_name").value;
     var geoCoder = new google.maps.Geocoder();
 
@@ -107,9 +109,56 @@ function findPlace() {
                         }, "<h1>"+key+"</h1><p></p>");
                     console.log("Marker added for ", key);
                 }
-                map.setZoom(17);
+                map.setZoom(15);
             }
         });
         console.log(a);
+    });
+}
+
+// for 'Locate Me!' find the location coordinates with IP
+function findMyLocation(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    alert(parseFloat(position.coords.latitude) + " " +  parseFloat(position.coords.longitude));
+    location_data = {};
+    location_data['lat'] = position.coords.latitude;
+    location_data['long'] = position.coords.longitude;
+    var a = $.ajax({
+        type : "POST",
+        url : "/data_to_find_distance",
+        data: JSON.stringify(location_data),
+        contentType: 'application/json;charset=UTF-8;',
+        success: function(result) {
+            console.log("" + result);
+        }
+    });
+
+}
+
+// getting the values from select and filtering the results
+function filterResults() {
+    var r = document.getElementById("radius");
+    var radius = r.options[r.selectedIndex].value;
+    var rl = document.getElementById("results_limit");
+    var results_limit = rl.options[rl.selectedIndex].value;
+    location_data['radius'] = radius;
+    location_data['results_limit'] = results_limit;
+    console.log(radius + " " + results_limit);
+    var a = $.ajax({
+        type : "POST",
+        url : "/data_to_find_distance",
+        data: JSON.stringify(location_data),
+        contentType: 'application/json;charset=UTF-8;',
+        success: function(result) {
+            console.log("" + result);
+        }
     });
 }
