@@ -168,5 +168,5 @@ function plotMarkers(result){
         allMarkers.push(marker1);
         // console.log("Marker added for ", key);
     }
-    map.setZoom(16);
+    map.setZoom(15);
 }
