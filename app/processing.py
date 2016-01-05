@@ -88,3 +88,5 @@ def calculate_distance(location_data , **kwargs):
 # if __name__ == "__main__":
 #     print calculate_distance(37.791777988510,-122.39751708644, radius=5, number_of_results=10)
 # No if __name__ = "__main__" yet as this script will scrictly be imported in other scripts and won't be executed standalone.
+
+
