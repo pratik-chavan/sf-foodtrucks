@@ -1,1 +1,1 @@
-web: flask/Scripts/gunicorn run:app
+web: ./flask/Scripts/gunicorn run:app
