@@ -3,6 +3,7 @@ from app import app
 app.run(debug=True)
 
 
+
 if not app.debug and os.environ.get('HEROKU') is None:
     import logging
     from logging.handlers import RotatingFileHandler

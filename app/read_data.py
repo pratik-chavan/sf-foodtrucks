@@ -1,9 +1,21 @@
 import csv
-from app import db
+from migrate.versioning import api
+from config import SQLALCHEMY_DATABASE_URI
+from config import SQLALCHEMY_MIGRATE_REPO
 from models import TruckData
+from app import db
+import os.path
+
+db.create_all()
+
+if not os.path.exists(SQLALCHEMY_MIGRATE_REPO):
+    api.create(SQLALCHEMY_MIGRATE_REPO, 'database repository')
+    api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
+else:
+    api.version_control(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO, api.version(SQLALCHEMY_MIGRATE_REPO))
+
 data_file = "Mobile_Food_Facility_Permit.csv"
 csv_file = csv.DictReader(open(data_file, 'rb'), delimiter=',')
-db.create_all()
 for row in csv_file:
         table_entries = {}
         for key, value in row.items():
