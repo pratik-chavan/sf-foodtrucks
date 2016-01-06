@@ -1,6 +1,5 @@
 import sys,math,operator, json
 import csv
-from models import TruckData
 data_file = "Mobile_Food_Facility_Permit.csv"
 csv_file = csv.DictReader(open(data_file, 'rb'), delimiter=',')
 raw_data = []
