@@ -1,7 +1,7 @@
 #!flask/bin/python
 from app import app
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
     if not app.debug and os.environ.get('HEROKU') is None:
         import logging
         from logging.handlers import RotatingFileHandler
