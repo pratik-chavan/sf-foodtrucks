@@ -43,6 +43,9 @@ def calculate_distance(location_data , **kwargs):
     print 'json lat', json_coord['lat']
     x = float(json_coord['lat'])
     y = float(json_coord['long'])
+    print "Printing x and y"
+    print x
+    print y
 
     # Omitting all the foodtrucks who don't have Approved status
     for d in raw_data:
@@ -94,7 +97,8 @@ def calculate_distance(location_data , **kwargs):
 
     # Convert the output to json and return
     output_json = json.dumps(output)
-
+    print "Printing output"
+    print output_json
     return output_json
 
 
