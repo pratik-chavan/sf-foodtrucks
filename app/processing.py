@@ -89,7 +89,7 @@ def calculate_distance(location_data , **kwargs):
     if("number_of_results" in kwargs.keys()):
         print sorted_distance
         print "Length of sorted idstance : " , len(sorted_distance)
-        print "Number of Results : " , number_of_results
+        print "type of Number of Results : " , number_of_results
         print "Radius : " , radius
         # Format of output - key -> value. Examples: ID -> (Latitude , Longitude).
     output = {}
