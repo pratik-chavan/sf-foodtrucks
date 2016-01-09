@@ -38,7 +38,7 @@ def calculate_distance(location_data , **kwargs):
 
     # May comment the following 5 line logic for local testing (No need to construct, pass and parse json to retrieve latitude and longitude)
 
-    print type(location_data)
+    print "arrived at server"
     json_coord = location_data
     print 'json lat', json_coord['lat']
     x = float(json_coord['lat'])
