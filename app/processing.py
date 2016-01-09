@@ -86,7 +86,9 @@ def calculate_distance(location_data , **kwargs):
 
     # Sorting the disctionary (using it's list of values) in ascending order
     sorted_distance = sorted(distance.items() , key=operator.itemgetter(1))
-
+    if("number_of_results" in kwargs.keys()):
+        print "Number of Results : " , number_of_results
+        print "Radius : " , radius
         # Format of output - key -> value. Examples: ID -> (Latitude , Longitude).
     output = {}
     for i in range(0,number_of_results):
