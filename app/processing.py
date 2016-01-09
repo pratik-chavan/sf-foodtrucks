@@ -55,10 +55,10 @@ def calculate_distance(location_data , **kwargs):
             data.append(d)
 
     distance = {}
-
     # Default number of results. To be modified in later versions of the script as this parameter will be retrieved from user.
     #  So, will most probably be in if-else fashion. If user enters use that or else use default
     if("number_of_results" in kwargs.keys()):
+        print "INSIDE FILTER PROCESSING"
         number_of_results = kwargs['number_of_results']
     else:
         number_of_results = 5
@@ -74,12 +74,14 @@ def calculate_distance(location_data , **kwargs):
             # Otherwise, set radius = sys.maxint since in that case their is no restriction on perimeter
 
             if("radius" in kwargs.keys()):
+                print "INSIDE FILTER PROCESSING"
                 radius = kwargs['radius']
 
                 # is_dist_within_radius returns a tuple t. t[0] => True if distance between 2 points is less than radius.
                 # t[1] is the actual distance d (miles) between 2 points.
 
                 if(is_dist_within_radius(x,y,float(d['Latitude']),float(d['Longitude']),radius)[0]):
+                    print "INSIDE FILTER PROCESSING - FOUND ONE POSSIBLE RESULT LOCATION"
                     distance[(d['Applicant'], d['Latitude'],d['Longitude'])] = is_dist_within_radius(x,y,d['Latitude'],d['Longitude'],radius)[1]
                 else:
                     distance[(d['Applicant'], d['Latitude'],d['Longitude'])] = sys.maxint
