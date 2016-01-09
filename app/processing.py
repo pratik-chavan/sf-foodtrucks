@@ -1,16 +1,6 @@
 import sys,math,operator, json
 import csv
-data_file = "Mobile_Food_Facility_Permit.csv"
-csv_file = csv.DictReader(open(data_file, 'rb'), delimiter=',')
-raw_data = []
 
-for row in csv_file:
-        table_entries = dict()
-        for key, value in row.items():
-                table_entries[key] = value
-        raw_data.append(table_entries)
-
-data = []
 
 # This function calls and returns the distance between 2 points in miles given their latitude and longitude.
 # This function also returns if the distance between given 2 points is less than radius or not
@@ -46,6 +36,18 @@ def calculate_distance(location_data , **kwargs):
     print "Printing x and y"
     print x
     print y
+
+    data_file = "Mobile_Food_Facility_Permit.csv"
+    csv_file = csv.DictReader(open(data_file, 'rb'), delimiter=',')
+    raw_data = []
+
+    for row in csv_file:
+        table_entries = dict()
+        for key, value in row.items():
+                table_entries[key] = value
+        raw_data.append(table_entries)
+
+    data = []
 
     # Omitting all the foodtrucks who don't have Approved status
     for d in raw_data:
