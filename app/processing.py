@@ -89,10 +89,10 @@ def calculate_distance(location_data , **kwargs):
 
         # Format of output - key -> value. Examples: ID -> (Latitude , Longitude).
     output = {}
-    for i in range(0,len(sorted_distance)):
+    for i in range(0,number_of_results):
+        print "Populating OUTPUT"
         output[sorted_distance[i][0][0]] = (sorted_distance[i][0][1],sorted_distance[i][0][2])
-        if i >= number_of_results - 1:
-            break
+
 
     if("number_of_results" in kwargs.keys()):
         print "OUTSIDE----------------********************"
