@@ -54,7 +54,7 @@ def calculate_distance(location_data , **kwargs):
     #  So, will most probably be in if-else fashion. If user enters use that or else use default
     if("number_of_results" in kwargs.keys()):
         print "INSIDE FILTER PROCESSING : no of results : " , kwargs['number_of_results']
-        number_of_results = kwargs['number_of_results']
+        number_of_results = int(kwargs['number_of_results'])
     else:
         number_of_results = 5
 
@@ -70,7 +70,7 @@ def calculate_distance(location_data , **kwargs):
 
             if("radius" in kwargs.keys()):
                 #print "INSIDE FILTER PROCESSING"
-                radius = kwargs['radius']
+                radius = int(kwargs['radius'])
 
                 # is_dist_within_radius returns a tuple t. t[0] => True if distance between 2 points is less than radius.
                 # t[1] is the actual distance d (miles) between 2 points.
