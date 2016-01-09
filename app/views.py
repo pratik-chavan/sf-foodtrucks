@@ -13,11 +13,11 @@ def data_to_find_distance():
     if request.method == "POST":
         print 'In url call views ', request.json
         if len(request.json) == 4:
-        	print "For filter - calling server "
-        	result = calculate_distance(request.json, radius = request.json['radius'], number_of_results = request.json['results_limit'])
-        	print "For filter - Printing result received from server"
-        	print result
+            print "For filter - calling server "
+            result = calculate_distance(request.json, radius = request.json['radius'], number_of_results = request.json['results_limit'])
+            print "For filter - Printing result received from server"
+            print result
             return result
         else:
-        	print "Initial non-filter based call"
+            print "Initial non-filter based call"
             return calculate_distance(request.json)
