@@ -88,6 +88,10 @@ def calculate_distance(location_data , **kwargs):
     sorted_distance = sorted(distance.items() , key=operator.itemgetter(1))
     if("number_of_results" in kwargs.keys()):
         print "OUTSIDE----------------********************"
+        print "Lenth of sorted distance"
+        print len(sorted_distance)
+        print "Printing OUTPUT (not in JSON)"
+        print output       
 
     # Format of output - key -> value. Examples: ID -> (Latitude , Longitude).
     output = {}
@@ -95,9 +99,7 @@ def calculate_distance(location_data , **kwargs):
         output[sorted_distance[i][0][0]] = (sorted_distance[i][0][1],sorted_distance[i][0][2])
         if i >= number_of_results - 1:
             break
-    if("radius" in kwargs.keys()):
-        print "Printing OUTPUT (not in JSON)"
-        print output
+
     # Convert the output to json and return
     output_json = json.dumps(output)
     return output_json
