@@ -28,14 +28,9 @@ def calculate_distance(location_data , **kwargs):
 
     # May comment the following 5 line logic for local testing (No need to construct, pass and parse json to retrieve latitude and longitude)
 
-    print "arrived at server"
     json_coord = location_data
-    print 'json lat', json_coord['lat']
     x = float(json_coord['lat'])
     y = float(json_coord['long'])
-    print "Printing x and y"
-    print x
-    print y
 
     data_file = "Mobile_Food_Facility_Permit.csv"
     csv_file = csv.DictReader(open(data_file, 'rb'), delimiter=',')
@@ -91,6 +86,8 @@ def calculate_distance(location_data , **kwargs):
 
     # Sorting the disctionary (using it's list of values) in ascending order
     sorted_distance = sorted(distance.items() , key=operator.itemgetter(1))
+    if("number_of_results" in kwargs.keys()):
+        print "OUTSIDE----------------********************"
 
     # Format of output - key -> value. Examples: ID -> (Latitude , Longitude).
     output = {}
