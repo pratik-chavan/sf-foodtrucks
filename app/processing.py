@@ -53,7 +53,7 @@ def calculate_distance(location_data , **kwargs):
     # Default number of results. To be modified in later versions of the script as this parameter will be retrieved from user.
     #  So, will most probably be in if-else fashion. If user enters use that or else use default
     if("number_of_results" in kwargs.keys()):
-        print "INSIDE FILTER PROCESSING"
+        print "INSIDE FILTER PROCESSING : no of results : " , kwargs['number_of_results']
         number_of_results = kwargs['number_of_results']
     else:
         number_of_results = 5
