@@ -74,14 +74,14 @@ def calculate_distance(location_data , **kwargs):
             # Otherwise, set radius = sys.maxint since in that case their is no restriction on perimeter
 
             if("radius" in kwargs.keys()):
-                print "INSIDE FILTER PROCESSING"
+                #print "INSIDE FILTER PROCESSING"
                 radius = kwargs['radius']
 
                 # is_dist_within_radius returns a tuple t. t[0] => True if distance between 2 points is less than radius.
                 # t[1] is the actual distance d (miles) between 2 points.
 
                 if(is_dist_within_radius(x,y,float(d['Latitude']),float(d['Longitude']),radius)[0]):
-                    print "INSIDE FILTER PROCESSING - FOUND ONE POSSIBLE RESULT LOCATION"
+                    #print "INSIDE FILTER PROCESSING - FOUND ONE POSSIBLE RESULT LOCATION"
                     distance[(d['Applicant'], d['Latitude'],d['Longitude'])] = is_dist_within_radius(x,y,d['Latitude'],d['Longitude'],radius)[1]
                 else:
                     distance[(d['Applicant'], d['Latitude'],d['Longitude'])] = sys.maxint
@@ -98,7 +98,8 @@ def calculate_distance(location_data , **kwargs):
         output[sorted_distance[i][0][0]] = (sorted_distance[i][0][1],sorted_distance[i][0][2])
         if i >= number_of_results - 1:
             break
-
+    print "Printing OUTPUT (not in JSON)"
+    print output
     # Convert the output to json and return
     output_json = json.dumps(output)
     print "Printing output"
